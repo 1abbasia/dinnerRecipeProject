@@ -1,3 +1,6 @@
+// let addRecipeBtn = document.getElementById('addRecipeBtn');
+// let radioButtons = document.querySelectorAll('input[name="looking"]');
+// let letsCookBtn = document.getElementById('letsCookBtn');
 let sideArr = ['french fries', 'macaroni', 'crispy potatoes', 'mozarella sticks'];
 let mainArr = ['steak', 'chicken sandwich', 'cheeseburger', 'pizza', 'pasta'];
 let dessertArr = ['cookie', 'cake', 'brownie', 'ice cream'];
@@ -35,45 +38,47 @@ function letsCook() {
             break;
     }
 }
-
-function clearColumn1() {
+function clearColumn1(){
     column1.innerHTML = "";
 }
-
-function submitOwnRecipe() {
+function clearColumn2(){
+    meal.innerText = '';
 }
+function submitOwnRecipe(){
 
+}
 addRecipeBtn.addEventListener('click', addRecipe);
-
-function addRecipe() {
+function addRecipe(){
     clearColumn1();
+    clearColumn2();
     column2.appendChild(img);
-
-    function createRecipeForm() {
+    function createRecipeForm(){
+         // create new div
         const recipeDiv = document.createElement('div');
+        // h2 inside the div
         const recipeTitle = document.createElement('h2');
         recipeTitle.innerText = 'Add Your Own Recipe';
-
+        // side input inside the div
         const sideInput = document.createElement('input');
         sideInput.setAttribute('type', 'text');
         sideInput.setAttribute('placeholder', 'Add Your Side');
-
+        // main input inside the div
         const mainInput = document.createElement('input');
         mainInput.setAttribute('type', 'text');
         mainInput.setAttribute('placeholder', 'Add Your Main');
-
+        // dessert input inside the div
         const dessertInput = document.createElement('input');
         dessertInput.setAttribute('type', 'text');
         dessertInput.setAttribute('placeholder', 'Add Your Dessert');
-
+        // submit button inside the div
         const submitButton = document.createElement('button');
         submitButton.setAttribute('id', 'addYourOwnRecipeBtn');
         submitButton.innerText = "Submit";
-
+        // go back button inside the div
         const backButton = document.createElement('button');
         backButton.setAttribute('id', 'backBtn');
         backButton.innerText = "Go Back";
-
+        // add br in between elements in the div
         const br1 = document.createElement('br');
         const br2 = document.createElement('br');
         const br3 = document.createElement('br');
@@ -83,19 +88,26 @@ function addRecipe() {
         const br7 = document.createElement('br');
         const br8 = document.createElement('br');
 
+        
+        // appending the h2, inputs, and buttons to recipeDiv
         recipeDiv.appendChild(recipeTitle);
         recipeDiv.appendChild(br1);
+        // recipeDiv.appendChild(br2);
         recipeDiv.appendChild(sideInput);
         recipeDiv.appendChild(br3);
+        // recipeDiv.appendChild(br4);
         recipeDiv.appendChild(mainInput);
         recipeDiv.appendChild(br5);
+        // recipeDiv.appendChild(br6);
         recipeDiv.appendChild(dessertInput);
         recipeDiv.appendChild(br7);
+        // recipeDiv.appendChild(br8);
         recipeDiv.appendChild(submitButton);
         recipeDiv.appendChild(br8);
         recipeDiv.appendChild(backButton);
-
+        
         column1.appendChild(recipeDiv);
+        // need to add the styling for the new created div
         recipeDiv.style.marginTop = '50px';
         recipeDiv.style.marginLeft = '40px';
         sideInput.style.display = 'block';
@@ -106,36 +118,29 @@ function addRecipe() {
         submitButton.style.width = '150px';
         backButton.style.backgroundColor = 'teal';
         backButton.style.width = '150px';
-
+        
+        // back button
         backButton.addEventListener('click', goBack);
         function goBack() {
             window.location.reload();
         }
-
-        submitButton.addEventListener('click', function (event) {
+        // submit button
+        submitButton.addEventListener('click', function(event){
             event.preventDefault();
             img.remove();
             const sideValue = sideInput.value;
+            sideArr.push(sideValue);
             const mainValue = mainInput.value;
+            mainArr.push(mainValue);
             const dessertValue = dessertInput.value;
-
-            if (sideValue) {
-                sideArr.push(sideValue);
-            }
-            if (mainValue) {
-                mainArr.push(mainValue);
-            }
-            if (dessertValue) {
-                dessertArr.push(dessertValue);
-            }
-
-            meal.innerText = `The meal consists of a side of ${sideValue}, the main dish being ${mainValue}, and finally for dessert, ${dessertValue}.`;
-
-            sideInput.value = '';
-            mainInput.value = '';
-            dessertInput.value = '';
+            dessertArr.push(dessertValue); 
+            meal.innerText = `The meal consists of a side of ${sideValue}, the main dish being ${mainValue}, and finally for dessert, ${dessertValue}.`
         });
-    }
+    
+       
 
+    }
     createRecipeForm();
 }
+
+
